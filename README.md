@@ -1,6 +1,6 @@
 # OWASP LLM Top 10 Playground
 
-[![CI](https://github.com/YOUR-USERNAME/owasp-llm-playground/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR-USERNAME/owasp-llm-playground/actions/workflows/ci.yml)
+[![CI](https://github.com/nithiya-rajesh/owasp-llm-playground/actions/workflows/ci.yml/badge.svg)](https://github.com/nithiya-rajesh/owasp-llm-playground/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
@@ -21,9 +21,6 @@ guide, and a CTF-style flag you capture on successful exploitation.
 **Run it only on your own machine, against your own local instance. This app
 is intentionally insecure — never deploy it publicly or point it at real
 credentials, data, or production services.**
-
-> Replace `YOUR-USERNAME` in the badge URLs above with your actual GitHub
-> username/org once you've pushed this — they won't resolve until then.
 
 ## Features
 
