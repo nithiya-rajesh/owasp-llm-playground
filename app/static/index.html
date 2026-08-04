@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OWASP LLM Top 10 Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">λ</div>
+      <div>
+        <div class="brand-title">LLM Top 10 Playground</div>
+        <div class="brand-sub">OWASP 2025 · local training lab</div>
+      </div>
+    </div>
+
+    <div class="progress-box">
+      <div class="progress-label">Flags captured</div>
+      <div class="progress-count"><span id="flag-count">0</span> / <span id="flag-total">10</span></div>
+      <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill"></div></div>
+    </div>
+
+    <div class="provider-badge" id="provider-badge">
+      <span class="provider-dot"></span>
+      <span id="provider-text">Checking backend…</span>
+    </div>
+
+    <nav id="scenario-list" class="scenario-list"><!-- populated by JS --></nav>
+  </aside>
+
+  <main class="main">
+    <div id="empty-state" class="empty-state">
+      <div class="empty-mark">⌁</div>
+      <p>Select a scenario from the left to begin.</p>
+    </div>
+
+    <div id="scenario-view" class="scenario-view hidden">
+      <header class="scenario-header">
+        <div>
+          <span class="owasp-chip" id="owasp-chip">LLM01:2025</span>
+          <h1 id="scenario-title">Title</h1>
+          <p class="scenario-tagline" id="scenario-tagline">tagline</p>
+        </div>
+        <div class="scenario-actions">
+          <span class="difficulty-chip" id="difficulty-chip">Beginner</span>
+          <button id="reset-btn" class="btn-ghost">Reset session</button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <section class="chat-panel">
+          <div id="chat-log" class="chat-log"></div>
+          <div id="flag-banner" class="flag-banner hidden">
+            🚩 <span id="flag-text"></span>
+          </div>
+          <form id="chat-form" class="chat-input-row">
+            <input id="chat-input" type="text" placeholder="Talk to the agent…" autocomplete="off" />
+            <button type="submit" class="btn-primary">Send</button>
+          </form>
+        </section>
+
+        <section class="side-panel">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="objective">Objective</button>
+            <button class="tab-btn" data-tab="hints">Hints</button>
+            <button class="tab-btn" data-tab="tools">Tool calls</button>
+            <button class="tab-btn" data-tab="fix">Fix</button>
+          </div>
+          <div class="tab-content active" id="tab-objective"></div>
+          <div class="tab-content" id="tab-hints"></div>
+          <div class="tab-content" id="tab-tools">
+            <div id="tool-log" class="tool-log"><p class="muted">No tool calls yet this session.</p></div>
+          </div>
+          <div class="tab-content" id="tab-fix">
+            <p class="muted" id="fix-locked">Capture the flag first to unlock the remediation guide.</p>
+            <div id="fix-content" class="hidden"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

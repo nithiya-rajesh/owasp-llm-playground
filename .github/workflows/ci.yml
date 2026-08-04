@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Verify all scenarios load and app boots
+        run: |
+          PYTHONPATH=. python3 -c "
+          import app.main
+          from app.scenarios import all_scenarios
+          scenarios = all_scenarios()
+          assert len(scenarios) == 25, f'Expected 25 scenarios, found {len(scenarios)}'
+          print(f'OK: {len(scenarios)} scenarios loaded, app imports cleanly')
+          "
+
+      - name: Run exploit verification suite
+        run: PYTHONPATH=. python3 tests/test_exploit_logic.py

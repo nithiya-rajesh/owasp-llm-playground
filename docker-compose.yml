@@ -1,0 +1,32 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PROVIDER=${MODEL_PROVIDER:-anthropic}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - ANTHROPIC_MODEL=${ANTHROPIC_MODEL:-claude-sonnet-5}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-flash-latest}
+      - OLLAMA_HOST=http://ollama:11434
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.1}
+      - PLAYGROUND_MAX_TOOL_TURNS=${PLAYGROUND_MAX_TOOL_TURNS:-10}
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  # Only actually used when MODEL_PROVIDER=ollama, but harmless (idle, no
+  # GPU/CPU cost beyond holding the container open) to leave running
+  # otherwise — comment out this whole service if you're only ever using
+  # Anthropic or Gemini and don't want it consuming RAM/disk at all.
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_models:
